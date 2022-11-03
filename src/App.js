@@ -1,25 +1,32 @@
-import logo from './logo.svg';
+import { useState } from "react";
 import './App.css';
 
 function App() {
+
+  const productsArray = ["Shirt", "Pants", "Tie", "Jacket", "Hat", "Scarf"];
+  const productItems = productsArray.map((item, i) => <option key={i} value={item}>{item}</option>);
+  const selectedItem = "";
+  
+  const [item, setItem] = useState("");
+
+
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Shopping Cart</h1>
+        <form>
+        <label for="products">Choose a Product: </label>
+        <select onChange={e => {setItem = (e.target.value);}} name="products" id="products">{productItems}</select>
+        <button onClick={(event) =>{console.log(item)}} className="addToCart" type="button">Add To Cart</button>
+      </form>
+      <div>
+        <p>Test</p>
+      </div>
       </header>
     </div>
   );
-}
+};
 
 export default App;
