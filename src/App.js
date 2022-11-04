@@ -8,8 +8,6 @@ function App() {
   const [cart, setCart] = useState({})
   const [item, setItem] = useState("Shirt");
   const cartDisplay = Object.entries(cart).map(([key, value]) => (<li key={key}>{key} X {value}</li>))
-
-
   function addToCartHandler(e){
     if (item in cart){
       setCart(cart=> ({...cart ,[item]: cart[item] + 1 }))
@@ -20,7 +18,7 @@ function App() {
     }
   }
   
-
+// commenting some lines
 
   return (
     <div className="App">
@@ -28,9 +26,8 @@ function App() {
         <h1>Shopping Cart</h1>
         <form>
         <label for="products">Choose a Product: </label>
-        <select onChange={e => {setItem(e.target.value);}} name="products" id="products">{productItems}</select>
+        <select onChange={e => {setItem(item=>(e.target.value));}} name="products" id="products">{productItems}</select>
         <button onClick={e =>{addToCartHandler(e)}} className="addToCart" type="button">Add To Cart</button>
-        
       </form>
       <div>
         <ul>
