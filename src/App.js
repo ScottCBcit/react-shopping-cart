@@ -3,20 +3,41 @@ import './App.css';
 
 function App() {
 
+
+  
+
   const productsArray = ["Shirt", "Pants", "Tie", "Jacket", "Hat", "Scarf"];
+  const [item, setItem] = useState(productsArray[0]);
   const productItems = productsArray.map((item, i) => <option key={i} value={item}>{item}</option>);
-  const [cart, setCart] = useState({})
-  const [item, setItem] = useState("Shirt");
-  const cartDisplay = Object.entries(cart).map(([key, value]) => (<li key={key}>{key} X {value}</li>))
+
+  const [cart, setCart] = useState({});
+  const cartDisplay = Object.entries(cart).map(([key, value]) => (<li key={key}>{key} X {value}</li>)) ;
+  const[numOfItems, setNumOfItem] = useState(1);
+  const cartText = Object.keys(cart).length === 0 ? <label>Add items to cart</label> 
+                                                  : <label>Number of items in cart: {numOfItems}</label>;
+
+
+
+  function numberOfItems(){ 
+    var values = 1;
+    for (const item in cart){
+      values += cart[item] 
+      console.log(item)
+    }
+    setNumOfItem(numOfItems=>(values))
+  };
+
+
   function addToCartHandler(e){
     if (item in cart){
       setCart(cart=> ({...cart ,[item]: cart[item] + 1 }))
-      console.log(cart[item])
+      numberOfItems();
     }
     else{
       setCart(cart => ({...cart, [item]: 1}))
+      numberOfItems();
     }
-  }
+  };
   
 // commenting some lines
 
@@ -33,6 +54,9 @@ function App() {
         <ul>
           {cartDisplay}
         </ul>
+      </div>
+      <div>
+        {cartText}
       </div>
       </header>
     </div>
